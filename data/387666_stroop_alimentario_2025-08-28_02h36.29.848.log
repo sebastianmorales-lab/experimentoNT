@@ -1,0 +1,84 @@
+5.6789 	DEBUG 	Fullscreen settings ignored as running in pilot mode.
+5.6803 	INFO 	Loaded monitor calibration from ['2025_07_19 10:04']
+5.9176 	EXP 	Created window1 = Window(allowGUI=False, allowStencil=False, autoLog=True, backendConf=UNKNOWN, backgroundFit=<method-wrapper '__getattribute__' of attributeSetter object at 0x000001B1084BE770>, backgroundImage=<method-wrapper '__getattribute__' of attributeSetter object at 0x000001B1084BE710>, bitsMode=UNKNOWN, blendMode='avg', bpc=(8, 8, 8), color=array([0, 0, 0]), colorSpace='rgb', depthBits=8, fullscr=False, gamma=None, gammaErrorPolicy='raise', infoMsg=UNKNOWN, lms=UNKNOWN, monitor=<psychopy.monitors.calibTools.Monitor object at 0x000001B108582230>, multiSample=False, name='window1', numSamples=2, pos=[560.0, 240.0], screen=0, size=array([800, 600]), stencilBits=0, stereo=False, title='PsychoPy', units='height', useFBO=True, useRetina=False, viewOri=0.0, viewPos=None, viewScale=None, waitBlanking=True, winType='pyglet')
+5.9177 	EXP 	window1: backgroundImage = ''
+5.9177 	EXP 	window1: backgroundFit = 'none'
+5.9249 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+5.9257 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+5.9264 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+5.9273 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+5.9283 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+5.9289 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+5.9296 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+5.9305 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+5.9309 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+5.9312 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+5.9319 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+5.9326 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+5.9337 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+5.9346 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+5.9353 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+5.9360 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+5.9367 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+5.9372 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+5.9376 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+5.9385 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+5.9390 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+5.9394 	DEBUG 	Uploading Texture Font fontname to graphics card
+5.9445 	DEBUG 	Upload of Texture Font fontname complete
+5.9506 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+5.9519 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+5.9528 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+5.9531 	DEBUG 	Uploading Texture Font fontname to graphics card
+5.9568 	DEBUG 	Upload of Texture Font fontname complete
+5.9585 	EXP 	window1: Attempting to measure frame rate of screen (0) ...
+5.9586 	EXP 	window1: recordFrameIntervals = False
+6.1387 	EXP 	window1: recordFrameIntervals = True
+6.2232 	WARNING 	t of last frame was 20.03ms (=1/49)
+6.3883 	EXP 	Screen (0) actual frame rate measured at 60.77Hz
+6.3883 	EXP 	window1: recordFrameIntervals = False
+6.3983 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+6.3990 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+6.4000 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+6.4012 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+6.4023 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+6.4035 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+6.4043 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+6.4056 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+6.4073 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+6.4088 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+6.4093 	DEBUG 	Uploading Texture Font fontname to graphics card
+6.4100 	DEBUG 	Upload of Texture Font fontname complete
+6.4247 	WARNING 	launchHubServer: If using the iohub mouse or eyetracker devices, fullScr should be True.
+9.0164 	INFO 	keyboard.Keyboard is using iohub backend.
+9.0164 	INFO 	keyboard.Keyboard is using iohub backend.
+9.0164 	INFO 	keyboard.Keyboard is using iohub backend.
+9.0165 	INFO 	keyboard.Keyboard is using iohub backend.
+9.0165 	EXP 	stroop_alimentario: status = STARTED
+9.1272 	EXP 	Created text_2 = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0.0, draggable=False, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='text_2', opacity=1, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text=str(...), units='height', win=Window(...), wrapWidth=1)
+9.1300 	EXP 	Created jitter = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0.0, draggable=False, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='jitter', opacity=1, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='+', units='height', win=Window(...), wrapWidth=1)
+9.3552 	EXP 	Created image = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0.0, draggable=False, flipHoriz=False, flipVert=False, image=str(...), interpolate=True, mask=None, maskParams=None, name='image', opacity=1, ori=0.0, pos=array([0., 0.]), size=array([0.5, 0.5]), texRes=128.0, units='height', win=Window(...))
+9.3575 	EXP 	Created text = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0.0, draggable=False, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='text', opacity=1, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='', units='height', win=Window(...), wrapWidth=1)
+9.3651 	EXP 	Created text_3 = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0.0, draggable=False, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='text_3', opacity=1, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='Muchas gracias por participar del esperimento.', units='height', win=Window(...), wrapWidth=1)
+0.0351 	INFO 	Keyboard events cleared
+0.0347 	EXP 	text_2: autoDraw = True
+2.3934 	DATA 	Keypress: space
+2.3990 	EXP 	text_2: autoDraw = False
+2.3990 	EXP 	jitter: autoDraw = True
+2.9201 	INFO 	Keyboard events cleared
+2.9195 	EXP 	jitter: autoDraw = False
+2.9195 	EXP 	jitter: autoDraw = False
+2.9195 	EXP 	image: autoDraw = True
+3.4893 	DATA 	Keypress: j
+4.9151 	EXP 	image: autoDraw = False
+4.9151 	EXP 	text: autoDraw = True
+5.9145 	INFO 	Keyboard events cleared
+5.9137 	EXP 	text: autoDraw = False
+5.9137 	EXP 	text_3: autoDraw = True
+6.9128 	EXP 	text_3: autoDraw = False
+15.1407 	DATA 	Keypress: space
+15.1543 	EXP 	text_3: autoDraw = False
+15.1569 	EXP 	stroop_alimentario: status = STOPPED
+15.1623 	INFO 	saved data to 'C:\\Users\\sebas\\Documents\\Python\\experimentoNT\\data/387666_stroop_alimentario_2025-08-28_02h36.29.848.csv'
+15.1631 	INFO 	saved data to C:\Users\sebas\Documents\Python\experimentoNT\data/387666_stroop_alimentario_2025-08-28_02h36.29.848.psydat
+15.5972 	DEBUG 	Saving data for stroop_alimentario ExperimentHandler
