@@ -1,0 +1,3 @@
+﻿Congruency,ImageFile,CalorieLabels,thisN,thisTrialN,thisRepN,trials.thisRepN,trials.thisTrialN,trials.thisN,trials.thisIndex,thisRow.t,notes,instructions.started,text_2.started,key_resp.started,instructions.stopped,key_resp.keys,key_resp.rt,key_resp.duration,trial.started,jitter.started,trial.stopped,participant,session,date,expName,psychopyVersion,frameRate,expStart,
+,,,,,,,,,,,,0.02368350001052022,0.05148859997279942,0.05148859997279942,4.6751349999103695,space,4.54521630005911,None,,,,077056,001,2025-09-13_02h14.34.204,stroop_alimentario,2024.2.4,60.04538229599241,2025-09-13 02h14.42.456321 -0300,
+congruente,/images/AZUCAR.png,altas calorias,0,0,0,0,0,0,2,4.729614499956369,,,,,,,,,4.718495999928564,4.729614499956369,5.184144799946807,,,,,,,,
