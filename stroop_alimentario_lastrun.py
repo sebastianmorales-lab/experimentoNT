@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2024.2.4),
-    on Setiembre 13, 2025, at 02:47
+    on Setiembre 13, 2025, at 11:56
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -18,7 +18,7 @@ from psychopy import plugins
 plugins.activatePlugins()
 prefs.hardware['audioLib'] = 'ptb'
 prefs.hardware['audioLatencyMode'] = '3'
-from psychopy import sound, gui, visual, core, data, event, logging, clock, colors, layout, hardware
+from psychopy import sound, gui, visual, core, data, event, logging, clock, colors, layout, hardware, iohub
 from psychopy.tools import environmenttools
 from psychopy.constants import (NOT_STARTED, STARTED, PLAYING, PAUSED,
                                 STOPPED, FINISHED, PRESSED, RELEASED, FOREVER, priority)
@@ -60,7 +60,7 @@ or run the experiment with `--pilot` as an argument. To change what pilot
 PILOTING = core.setPilotModeFromArgs()
 # start off with values from experiment settings
 _fullScr = True
-_winSize = (1024, 768)
+_winSize = [1536, 864]
 # if in pilot mode, apply overrides according to preferences
 if PILOTING:
     # force windowed mode
@@ -243,6 +243,16 @@ def setupDevices(expInfo, thisExp, win):
     # --- Setup input devices ---
     ioConfig = {}
     
+    # Setup eyetracking
+    ioConfig['eyetracker.hw.mouse.EyeTracker'] = {
+        'name': 'tracker',
+        'controls': {
+            'move': [],
+            'blink':('LEFT_BUTTON', 'MIDDLE_BUTTON', 'RIGHT_BUTTON'),
+            'saccade_threshold': 0.5,
+        }
+    }
+    
     # Setup iohub keyboard
     ioConfig['Keyboard'] = dict(use_keymap='psychopy')
     
@@ -254,6 +264,7 @@ def setupDevices(expInfo, thisExp, win):
     
     # store ioServer object in the device manager
     deviceManager.ioServer = ioServer
+    deviceManager.devices['eyetracker'] = ioServer.getDevice('tracker')
     
     # create a default keyboard (e.g. to check for escape)
     if deviceManager.getDevice('defaultKeyboard') is None:
@@ -397,6 +408,13 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=0.0);
+    etRecord = hardware.eyetracker.EyetrackerControl(
+        tracker=eyetracker,
+        actionType='Start Only'
+    )
+    mouse = event.Mouse(win=win)
+    x, y = [None, None]
+    mouse.mouseClock = core.Clock()
     
     # --- Initialize components for Routine "food1" ---
     image = visual.ImageStim(
@@ -415,6 +433,9 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=-2.0);
+    mouse_2 = event.Mouse(win=win)
+    x, y = [None, None]
+    mouse_2.mouseClock = core.Clock()
     
     # --- Initialize components for Routine "blank" ---
     text = visual.TextStim(win=win, name='text',
@@ -424,6 +445,13 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=0.0);
+    etRecord_2 = hardware.eyetracker.EyetrackerControl(
+        tracker=eyetracker,
+        actionType='Stop Only'
+    )
+    mouse_3 = event.Mouse(win=win)
+    x, y = [None, None]
+    mouse_3.mouseClock = core.Clock()
     
     # --- Initialize components for Routine "Thanks" ---
     text_3 = visual.TextStim(win=win, name='text_3',
@@ -607,11 +635,11 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     # set up handler to look after randomisation of conditions etc
     trials = data.TrialHandler2(
         name='trials',
-        nReps=5.0, 
+        nReps=1.0, 
         method='random', 
         extraInfo=expInfo, 
         originPath=-1, 
-        trialList=data.importConditions('Conditions.csv'), 
+        trialList=data.importConditions('Conditions_short.csv'), 
         seed=None, 
     )
     thisExp.addLoop(trials)  # add the loop to the experiment
@@ -639,11 +667,19 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         # create an object to store info about Routine trial
         trial = data.Routine(
             name='trial',
-            components=[jitter],
+            components=[jitter, etRecord, mouse],
         )
         trial.status = NOT_STARTED
         continueRoutine = True
         # update component parameters for each repeat
+        # setup some python lists for storing info about the mouse
+        mouse.x = []
+        mouse.y = []
+        mouse.leftButton = []
+        mouse.midButton = []
+        mouse.rightButton = []
+        mouse.time = []
+        gotValidClick = False  # until a click is received
         # store start times for trial
         trial.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
         trial.tStart = globalClock.getTime(format='float')
@@ -711,6 +747,70 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                     jitter.status = FINISHED
                     jitter.setAutoDraw(False)
             
+            # *etRecord* updates
+            
+            # if etRecord is starting this frame...
+            if etRecord.status == NOT_STARTED and t >= 0.0-frameTolerance:
+                # keep track of start time/frame for later
+                etRecord.frameNStart = frameN  # exact frame index
+                etRecord.tStart = t  # local t and not account for scr refresh
+                etRecord.tStartRefresh = tThisFlipGlobal  # on global time
+                win.timeOnFlip(etRecord, 'tStartRefresh')  # time at next scr refresh
+                # add timestamp to datafile
+                thisExp.addData('etRecord.started', t)
+                # update status
+                etRecord.status = STARTED
+                etRecord.start()
+            if etRecord.status == STARTED:
+                etRecord.tStop = t  # not accounting for scr refresh
+                etRecord.tStopRefresh = tThisFlipGlobal  # on global time
+                etRecord.frameNStop = frameN  # exact frame index
+                etRecord.status = FINISHED
+            # *mouse* updates
+            
+            # if mouse is starting this frame...
+            if mouse.status == NOT_STARTED and t >= 0.0-frameTolerance:
+                # keep track of start time/frame for later
+                mouse.frameNStart = frameN  # exact frame index
+                mouse.tStart = t  # local t and not account for scr refresh
+                mouse.tStartRefresh = tThisFlipGlobal  # on global time
+                win.timeOnFlip(mouse, 'tStartRefresh')  # time at next scr refresh
+                # add timestamp to datafile
+                thisExp.addData('mouse.started', t)
+                # update status
+                mouse.status = STARTED
+                mouse.mouseClock.reset()
+                prevButtonState = mouse.getPressed()  # if button is down already this ISN'T a new click
+            
+            # if mouse is stopping this frame...
+            if mouse.status == STARTED:
+                # is it time to stop? (based on global clock, using actual start)
+                if tThisFlipGlobal > mouse.tStartRefresh + 0.5-frameTolerance:
+                    # keep track of stop time/frame for later
+                    mouse.tStop = t  # not accounting for scr refresh
+                    mouse.tStopRefresh = tThisFlipGlobal  # on global time
+                    mouse.frameNStop = frameN  # exact frame index
+                    # add timestamp to datafile
+                    thisExp.addData('mouse.stopped', t)
+                    # update status
+                    mouse.status = FINISHED
+            if mouse.status == STARTED:  # only update if started and not finished!
+                buttons = mouse.getPressed()
+                if buttons != prevButtonState:  # button state changed?
+                    prevButtonState = buttons
+                    if sum(buttons) > 0:  # state changed to a new click
+                        pass
+                        x, y = mouse.getPos()
+                        mouse.x.append(x)
+                        mouse.y.append(y)
+                        buttons = mouse.getPressed()
+                        mouse.leftButton.append(buttons[0])
+                        mouse.midButton.append(buttons[1])
+                        mouse.rightButton.append(buttons[2])
+                        mouse.time.append(mouse.mouseClock.getTime())
+                        
+                        continueRoutine = False  # end routine on response
+            
             # check for quit (typically the Esc key)
             if defaultKeyboard.getKeys(keyList=["escape"]):
                 thisExp.status = FINISHED
@@ -750,6 +850,13 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         trial.tStop = globalClock.getTime(format='float')
         trial.tStopRefresh = tThisFlipGlobal
         thisExp.addData('trial.stopped', trial.tStop)
+        # store data for trials (TrialHandler)
+        trials.addData('mouse.x', mouse.x)
+        trials.addData('mouse.y', mouse.y)
+        trials.addData('mouse.leftButton', mouse.leftButton)
+        trials.addData('mouse.midButton', mouse.midButton)
+        trials.addData('mouse.rightButton', mouse.rightButton)
+        trials.addData('mouse.time', mouse.time)
         # using non-slip timing so subtract the expected duration of this Routine (unless ended on request)
         if trial.maxDurationReached:
             routineTimer.addTime(-trial.maxDuration)
@@ -762,7 +869,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         # create an object to store info about Routine food1
         food1 = data.Routine(
             name='food1',
-            components=[image, key_resp_3, text_4],
+            components=[image, key_resp_3, text_4, mouse_2],
         )
         food1.status = NOT_STARTED
         continueRoutine = True
@@ -773,6 +880,14 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         key_resp_3.rt = []
         _key_resp_3_allKeys = []
         text_4.setText(CalorieLabels)
+        # setup some python lists for storing info about the mouse_2
+        mouse_2.x = []
+        mouse_2.y = []
+        mouse_2.leftButton = []
+        mouse_2.midButton = []
+        mouse_2.rightButton = []
+        mouse_2.time = []
+        gotValidClick = False  # until a click is received
         # store start times for food1
         food1.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
         food1.tStart = globalClock.getTime(format='float')
@@ -913,6 +1028,50 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                     # update status
                     text_4.status = FINISHED
                     text_4.setAutoDraw(False)
+            # *mouse_2* updates
+            
+            # if mouse_2 is starting this frame...
+            if mouse_2.status == NOT_STARTED and t >= 0.0-frameTolerance:
+                # keep track of start time/frame for later
+                mouse_2.frameNStart = frameN  # exact frame index
+                mouse_2.tStart = t  # local t and not account for scr refresh
+                mouse_2.tStartRefresh = tThisFlipGlobal  # on global time
+                win.timeOnFlip(mouse_2, 'tStartRefresh')  # time at next scr refresh
+                # add timestamp to datafile
+                thisExp.addData('mouse_2.started', t)
+                # update status
+                mouse_2.status = STARTED
+                mouse_2.mouseClock.reset()
+                prevButtonState = mouse_2.getPressed()  # if button is down already this ISN'T a new click
+            
+            # if mouse_2 is stopping this frame...
+            if mouse_2.status == STARTED:
+                # is it time to stop? (based on global clock, using actual start)
+                if tThisFlipGlobal > mouse_2.tStartRefresh + 2-frameTolerance:
+                    # keep track of stop time/frame for later
+                    mouse_2.tStop = t  # not accounting for scr refresh
+                    mouse_2.tStopRefresh = tThisFlipGlobal  # on global time
+                    mouse_2.frameNStop = frameN  # exact frame index
+                    # add timestamp to datafile
+                    thisExp.addData('mouse_2.stopped', t)
+                    # update status
+                    mouse_2.status = FINISHED
+            if mouse_2.status == STARTED:  # only update if started and not finished!
+                buttons = mouse_2.getPressed()
+                if buttons != prevButtonState:  # button state changed?
+                    prevButtonState = buttons
+                    if sum(buttons) > 0:  # state changed to a new click
+                        pass
+                        x, y = mouse_2.getPos()
+                        mouse_2.x.append(x)
+                        mouse_2.y.append(y)
+                        buttons = mouse_2.getPressed()
+                        mouse_2.leftButton.append(buttons[0])
+                        mouse_2.midButton.append(buttons[1])
+                        mouse_2.rightButton.append(buttons[2])
+                        mouse_2.time.append(mouse_2.mouseClock.getTime())
+                        
+                        continueRoutine = False  # end routine on response
             
             # check for quit (typically the Esc key)
             if defaultKeyboard.getKeys(keyList=["escape"]):
@@ -960,6 +1119,13 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         if key_resp_3.keys != None:  # we had a response
             trials.addData('key_resp_3.rt', key_resp_3.rt)
             trials.addData('key_resp_3.duration', key_resp_3.duration)
+        # store data for trials (TrialHandler)
+        trials.addData('mouse_2.x', mouse_2.x)
+        trials.addData('mouse_2.y', mouse_2.y)
+        trials.addData('mouse_2.leftButton', mouse_2.leftButton)
+        trials.addData('mouse_2.midButton', mouse_2.midButton)
+        trials.addData('mouse_2.rightButton', mouse_2.rightButton)
+        trials.addData('mouse_2.time', mouse_2.time)
         # using non-slip timing so subtract the expected duration of this Routine (unless ended on request)
         if food1.maxDurationReached:
             routineTimer.addTime(-food1.maxDuration)
@@ -972,11 +1138,19 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         # create an object to store info about Routine blank
         blank = data.Routine(
             name='blank',
-            components=[text],
+            components=[text, etRecord_2, mouse_3],
         )
         blank.status = NOT_STARTED
         continueRoutine = True
         # update component parameters for each repeat
+        # setup some python lists for storing info about the mouse_3
+        mouse_3.x = []
+        mouse_3.y = []
+        mouse_3.leftButton = []
+        mouse_3.midButton = []
+        mouse_3.rightButton = []
+        mouse_3.time = []
+        gotValidClick = False  # until a click is received
         # store start times for blank
         blank.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
         blank.tStart = globalClock.getTime(format='float')
@@ -1044,6 +1218,72 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                     text.status = FINISHED
                     text.setAutoDraw(False)
             
+            # *etRecord_2* updates
+            if etRecord_2.status == NOT_STARTED:
+                etRecord_2.frameNStart = frameN  # exact frame index
+                etRecord_2.tStart = t  # local t and not account for scr refresh
+                etRecord_2.tStartRefresh = tThisFlipGlobal  # on global time
+                win.timeOnFlip(etRecord_2, 'tStartRefresh')  # time at next scr refresh
+                etRecord_2.status = STARTED
+            
+            # if etRecord_2 is stopping this frame...
+            if etRecord_2.status == STARTED:
+                # is it time to stop? (based on global clock, using actual start)
+                if tThisFlipGlobal > etRecord_2.tStartRefresh + 1-frameTolerance:
+                    # keep track of stop time/frame for later
+                    etRecord_2.tStop = t  # not accounting for scr refresh
+                    etRecord_2.tStopRefresh = tThisFlipGlobal  # on global time
+                    etRecord_2.frameNStop = frameN  # exact frame index
+                    # add timestamp to datafile
+                    thisExp.addData('etRecord_2.stopped', t)
+                    # update status
+                    etRecord_2.status = FINISHED
+                    etRecord_2.stop()
+            # *mouse_3* updates
+            
+            # if mouse_3 is starting this frame...
+            if mouse_3.status == NOT_STARTED and t >= 0.0-frameTolerance:
+                # keep track of start time/frame for later
+                mouse_3.frameNStart = frameN  # exact frame index
+                mouse_3.tStart = t  # local t and not account for scr refresh
+                mouse_3.tStartRefresh = tThisFlipGlobal  # on global time
+                win.timeOnFlip(mouse_3, 'tStartRefresh')  # time at next scr refresh
+                # add timestamp to datafile
+                thisExp.addData('mouse_3.started', t)
+                # update status
+                mouse_3.status = STARTED
+                mouse_3.mouseClock.reset()
+                prevButtonState = mouse_3.getPressed()  # if button is down already this ISN'T a new click
+            
+            # if mouse_3 is stopping this frame...
+            if mouse_3.status == STARTED:
+                # is it time to stop? (based on global clock, using actual start)
+                if tThisFlipGlobal > mouse_3.tStartRefresh + 1.0-frameTolerance:
+                    # keep track of stop time/frame for later
+                    mouse_3.tStop = t  # not accounting for scr refresh
+                    mouse_3.tStopRefresh = tThisFlipGlobal  # on global time
+                    mouse_3.frameNStop = frameN  # exact frame index
+                    # add timestamp to datafile
+                    thisExp.addData('mouse_3.stopped', t)
+                    # update status
+                    mouse_3.status = FINISHED
+            if mouse_3.status == STARTED:  # only update if started and not finished!
+                buttons = mouse_3.getPressed()
+                if buttons != prevButtonState:  # button state changed?
+                    prevButtonState = buttons
+                    if sum(buttons) > 0:  # state changed to a new click
+                        pass
+                        x, y = mouse_3.getPos()
+                        mouse_3.x.append(x)
+                        mouse_3.y.append(y)
+                        buttons = mouse_3.getPressed()
+                        mouse_3.leftButton.append(buttons[0])
+                        mouse_3.midButton.append(buttons[1])
+                        mouse_3.rightButton.append(buttons[2])
+                        mouse_3.time.append(mouse_3.mouseClock.getTime())
+                        
+                        continueRoutine = False  # end routine on response
+            
             # check for quit (typically the Esc key)
             if defaultKeyboard.getKeys(keyList=["escape"]):
                 thisExp.status = FINISHED
@@ -1083,6 +1323,13 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         blank.tStop = globalClock.getTime(format='float')
         blank.tStopRefresh = tThisFlipGlobal
         thisExp.addData('blank.stopped', blank.tStop)
+        # store data for trials (TrialHandler)
+        trials.addData('mouse_3.x', mouse_3.x)
+        trials.addData('mouse_3.y', mouse_3.y)
+        trials.addData('mouse_3.leftButton', mouse_3.leftButton)
+        trials.addData('mouse_3.midButton', mouse_3.midButton)
+        trials.addData('mouse_3.rightButton', mouse_3.rightButton)
+        trials.addData('mouse_3.time', mouse_3.time)
         # using non-slip timing so subtract the expected duration of this Routine (unless ended on request)
         if blank.maxDurationReached:
             routineTimer.addTime(-blank.maxDuration)
@@ -1092,7 +1339,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             routineTimer.addTime(-1.000000)
         thisExp.nextEntry()
         
-    # completed 5.0 repeats of 'trials'
+    # completed 1.0 repeats of 'trials'
     
     if thisSession is not None:
         # if running in a Session with a Liaison client, send data up to now
