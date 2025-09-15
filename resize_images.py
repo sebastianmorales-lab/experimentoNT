@@ -3,8 +3,8 @@ import os
 
 # Define size and paths
 target_size = (512, 512)
-input_folder = "images"
-output_folder = "imagenes2"
+input_folder = "sinfondo"
+output_folder = "images"
 
 # Create output directory if it doesn't exist
 os.makedirs(output_folder, exist_ok=True)
